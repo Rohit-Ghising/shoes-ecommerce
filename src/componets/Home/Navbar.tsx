@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { BsBag } from "react-icons/bs";
 import { CiHeart, CiSearch } from "react-icons/ci";
+import { IoClose } from "react-icons/io5";
 
 function Navbar() {
+  const [isCartOpen, setIsCartOpen] = useState(false);
   return (
     <>
       <div className="bg-black  ">
@@ -48,10 +51,12 @@ function Navbar() {
               </span>
             </a>
             <a href="#" className="relative ml-6">
-              <BsBag className="h-8 w-8 text-white" />
-              <span className="text-white bg-green-600  absolute top-0 right-0 rounded-full ">
-                <h1 className="w-4 items-center justify-center flex">1</h1>
-              </span>
+              <button onClick={() => setIsCartOpen(true)} className="relative">
+                <BsBag className="h-8 w-8 text-white" />
+                <span className="text-white bg-green-600  absolute top-0 right-0 rounded-full ">
+                  <h1 className="w-4 items-center justify-center flex">1</h1>
+                </span>
+              </button>
             </a>
             <h1 className="flex items-center justify-center text-white mx-6 font-semibold">
               NPR <span className="mx-1">0.0</span>
@@ -69,6 +74,39 @@ function Navbar() {
         <a href="">Men</a>
         <a href="">Women</a>
         <a href="">Junior</a>
+
+        {/* functiom to open catr
+         */}
+        {isCartOpen && (
+          <div
+            className="fixed inset-0 "
+            onClick={() => setIsCartOpen(false)}
+          ></div>
+        )}
+        {/* crart drwaer */}
+
+        <div
+          className={`fixed top-0 right-0 h-full w-80 bg-white shadow-lg transform transition-transform duration-300 z-50 ${
+            isCartOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex justify-between items-center p-4 border-b">
+            {" "}
+            <h2 className="text-lg font-semibold">Your Cart</h2>
+            <IoClose
+              className=" cursor-pointer text-2xl"
+              onClick={() => setIsCartOpen(false)}
+            />
+          </div>
+          {/*Drwaer Content */}
+          <div className="p-4 h-[400px]">
+            <p className="text-gray-500">Your cart is empty</p>
+          </div>
+          {/* Draer footer */}
+          <button className="bg-green-600 w-full text-white py-2 rounded">
+            Checkout
+          </button>
+        </div>
       </div>
     </>
   );
