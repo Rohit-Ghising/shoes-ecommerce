@@ -1,55 +1,24 @@
 import { BsBag } from "react-icons/bs";
 import { CiHeart, CiSearch } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
-
-const items = [
-  {
-    id: "123",
-    imageurl:
-      "https://images.unsplash.com/photo-1465453869711-7e174808ace9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c25lYWtlcnN8ZW58MHx8MHx8fDA%3D",
-    title: "sneakers",
-    gender: "male",
-    price: "500",
-    material: "leather",
-    tipShaped: "rounded",
-  },
-  {
-    id: "1234",
-    imageurl:
-      "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c25lYWtlcnN8ZW58MHx8MHx8fDA%3D",
-    title: "sneakers",
-    gender: "female",
-    price: "500",
-  },
-  {
-    id: "1235",
-    imageurl:
-      "https://images.unsplash.com/photo-1512374382149-233c42b6a83b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c25lYWtlcnN8ZW58MHx8MHx8fDA%3D",
-    title: "sneakers",
-    gender: "female",
-    price: "500",
-  },
-];
+import { useProducts } from "../../context/ProductContext";
 
 const Newarrivals = () => {
   const navigate = useNavigate();
+  const { products } = useProducts();
   return (
     <div>
       <div className="w-3/4 mx-auto mt-16 ">
         <div>
           <h1 className="font-semibold text-2xl underline">New Arrivals</h1>
           <div className="grid grid-cols-1  md:grid-cols-3 gap-6  ">
-            {items.slice(0, 6).map((item, index) => (
+            {products.slice(0, 6).map((item, index) => (
               <div key={index} className="group ">
                 <img
                   src={item.imageurl}
                   alt="loading"
                   className="h-[400px] w-[400px] rounded-lg"
-                  onClick={() =>
-                    navigate(`/product/${item.id}`, {
-                      state: { product: item },
-                    })
-                  }
+                  onClick={() => navigate(`/product/${item.id}`)}
                 />
                 <h1 className="flex items-center justify-center text-2xl ">
                   {item.title}
